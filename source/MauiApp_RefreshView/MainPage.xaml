@@ -1,0 +1,75 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Class="MauiApp_RefreshView.MainPage"
+    
+    xmlns:viewModels="clr-namespace:MauiApp_RefreshView.ViewModels"
+    x:DataType="viewModels:MainViewModel"
+    >
+    <ContentPage.BindingContext>
+        <viewModels:MainViewModel x:Name="ViewModel" />
+    </ContentPage.BindingContext>
+    
+    <Grid
+        RowSpacing="0"
+        RowDefinitions="Auto,*,Auto"
+        >
+        <!-- Header -->
+        <StackLayout      
+                Padding="16,8"
+                Spacing="0"
+                CompressedLayout.IsHeadless="true"
+                >
+            <!-- Title  -->
+            <Label
+                Margin="16,8"
+                Text="Overview"
+                TextColor="{AppThemeBinding Light={StaticResource Gray900}, Dark={StaticResource Gray100}}"
+                HorizontalTextAlignment="Start" 
+                />
+            <BoxView />
+        </StackLayout>
+
+        <!-- KlipperState -->
+        <RefreshView 
+            Grid.Row="1"
+            IsRefreshing="{Binding IsRefreshing}" 
+            Command="{Binding RefreshPageCommand}"
+            >
+            <ScrollView>
+                <StackLayout>
+                    <!--
+                    <Label
+                        HorizontalTextAlignment="Center"
+                        >
+                        <Label.FormattedText>
+                            <FormattedString>
+                                <FormattedString.Spans>
+                                    <Span Text="Click counter: " />
+                                    <Span Text="{Binding Counter}" />
+                                </FormattedString.Spans>
+                            </FormattedString>
+                        </Label.FormattedText>
+                    </Label>
+                    -->
+                    
+                    <Button
+                        Margin="20,6,20,4"
+                        Command="{Binding OnClickCommand}"
+                        Text="Open Modal"
+                        />
+                    <!-- ... -->
+                </StackLayout>
+            </ScrollView>
+        </RefreshView>
+
+        <!-- Tag line -->
+        <StackLayout 
+                Grid.Row="2" 
+                BackgroundColor="{AppThemeBinding Light={StaticResource Gray100}, Dark={StaticResource Gray900}}"
+                >
+            <BoxView />
+        </StackLayout>
+    </Grid>
+</ContentPage>
